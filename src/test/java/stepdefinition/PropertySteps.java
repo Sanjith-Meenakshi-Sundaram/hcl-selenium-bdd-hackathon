@@ -1,34 +1,41 @@
 package stepdefinition;
 
 import io.cucumber.java.en.*;
-import pages.PropertyPage;
-import utils.DriverManager;
+import pages.SearchPage;
+import pages.LoginPopupPage;
 
+import org.testng.Assert;
 import org.openqa.selenium.*;
+import utils.DriverManager;
 
 import java.io.File;
 import org.apache.commons.io.FileUtils;
 
 public class PropertySteps {
 
-    PropertyPage property = new PropertyPage();
+    SearchPage searchPage = new SearchPage();
+    LoginPopupPage popup = new LoginPopupPage();
 
-    @When("user navigates to property page")
-    public void navigateProperty(){
-        DriverManager.getDriver().navigate().to("https://www.nobroker.in/property/rent/pune/");
+    @When("user clicks contact owner button")
+    public void clickContactOwner(){
+
+        searchPage.clickContactOwner();
     }
 
-    @And("user clicks owner details or schedule button")
-    public void clickOwner(){
-        property.clickOwnerOrSchedule();
+    @Then("login popup should appear")
+    public void verifyLoginPopup(){
+
+        Assert.assertTrue(
+                popup.isLoginPopupVisible(),
+                "Login popup did not appear"
+        );
     }
 
-    @Then("screenshot should be captured")
-    public void screenshot() throws Exception{
+    @And("login popup screenshot should be captured")
+    public void captureScreenshot() throws Exception {
 
-        TakesScreenshot ts = (TakesScreenshot) DriverManager.getDriver();
-        File src = ts.getScreenshotAs(OutputType.FILE);
+        File src = popup.getPopup().getScreenshotAs(OutputType.FILE);
 
-        FileUtils.copyFile(src,new File("target/screenshot.png"));
+        FileUtils.copyFile(src,new File("target/loginPopup.png"));
     }
 }

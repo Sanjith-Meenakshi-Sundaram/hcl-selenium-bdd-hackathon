@@ -7,43 +7,30 @@ import utils.DriverManager;
 
 import java.time.Duration;
 
-public class PropertyPage {
+public class LoginPopupPage {
 
     WebDriver driver;
     WebDriverWait wait;
 
-    public PropertyPage(){
+    public LoginPopupPage(){
 
         driver = DriverManager.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
         PageFactory.initElements(driver,this);
     }
-
-    @FindBy(xpath="(//button[@id='getOwnerDetails'])[2]")
-    WebElement contactOwner;
 
     @FindBy(xpath="//div[contains(@class,'login-signup__modal-dialog')]")
     WebElement loginPopup;
 
-    public void clickContactOwner(){
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        js.executeScript("arguments[0].scrollIntoView(true);", contactOwner);
-
-        wait.until(ExpectedConditions.elementToBeClickable(contactOwner));
-
-        js.executeScript("arguments[0].click();", contactOwner);
-    }
-
-    public boolean isLoginPopupDisplayed(){
+    public boolean isLoginPopupVisible(){
 
         wait.until(ExpectedConditions.visibilityOf(loginPopup));
 
         return loginPopup.isDisplayed();
     }
 
-    public WebElement getLoginPopup(){
+    public WebElement getPopup(){
         return loginPopup;
     }
 }

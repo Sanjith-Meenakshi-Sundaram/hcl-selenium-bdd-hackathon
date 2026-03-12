@@ -40,9 +40,21 @@ public class SearchPage {
     @FindBy(css=".prop-search-button")
     WebElement searchBtn;
 
-    // Save Search button
-    @FindBy(id="saveSearch")
-    WebElement saveSearch;
+    @FindBy(xpath="//a[text()='fd']")
+    WebElement ownerName;
+    @FindBy(xpath="(//button[@id='getOwnerDetails'])[1]")
+    WebElement contactOwnerBtn;
+
+    public void clickContactOwner(){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        js.executeScript("arguments[0].scrollIntoView(true);", contactOwnerBtn);
+
+        wait.until(ExpectedConditions.elementToBeClickable(contactOwnerBtn));
+
+        js.executeScript("arguments[0].click();", contactOwnerBtn);
+    }
 
     public void selectCity(){
         wait.until(ExpectedConditions.visibilityOf(cityDrop)).click();
@@ -63,10 +75,10 @@ public class SearchPage {
     // Assertion method}
 
 	public void verifySaveSearchDisplayed() {
-		wait.until(ExpectedConditions.visibilityOf(saveSearch));
+		wait.until(ExpectedConditions.visibilityOf(ownerName));
 
         Assert.assertTrue(
-                saveSearch.isDisplayed(),
+        		ownerName.isDisplayed(),
                 "Save Search button is NOT displayed after search results"
         );
 		// TODO Auto-generated method stub

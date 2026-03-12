@@ -22,6 +22,7 @@ public class DriverFactory {
                 Map<String, Object> prefs = new HashMap<>();
                 prefs.put("credentials_enable_service", false);
                 prefs.put("profile.password_manager_leak_detection", false);
+                prefs.put("profile.default_content_setting_values.notifications", 2);
                 ChromeOptions options = new ChromeOptions();
                 options.setExperimentalOption("prefs", prefs);
                 driver = new ChromeDriver(options);
