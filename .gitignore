@@ -1,0 +1,39 @@
+# =========================
+# Maven
+# =========================
+target/
+dependency-reduced-pom.xml
+
+# =========================
+# Allure Reports
+# ========================
+allure-results/
+allure-report/
+
+# TestNG reports
+test-output/
+
+# =========================
+# Eclipse
+# =========================
+.settings/
+.classpath
+.project
+bin/
+
+# =========================
+# IntelliJ (if used later)
+# =========================
+.idea/
+*.iml
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
